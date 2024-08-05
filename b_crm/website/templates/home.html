@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% comment %} {% load honeypot %} {% endcomment %}
+
 {% block content %}
 
 <div class="mt-3">
@@ -52,6 +54,7 @@
   {% csrf_token %}
     <form>
         <div class="mb-3">
+          {% comment %} {% render_honeypot_field "username" %} {% endcomment %}
           <label for="exampleInputEmail1" class="form-label">Kullanıcı Adı</label>
           <input type="text" class="form-control" name="username" placeholder= "Kullanıcı Adı" required>
         </div>

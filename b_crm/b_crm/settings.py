@@ -38,7 +38,9 @@ LOCAL_APPS = [
     ]
 
 THIRD_PARTY_APPS = [
-    "unfold",
+    "unfold", 
+    "admin_honeypot",
+    "honeypot",
 ]
 
 

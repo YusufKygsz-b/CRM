@@ -107,9 +107,10 @@ from .models import Record
 from notifications.signals import notify
 from notifications.models import Notification
 from django.contrib.auth.models import User
+from honeypot.decorators import check_honeypot
 
 
-
+# @check_honeypot(field_name='username')
 def home(request):
     records = Record.objects.all()
     notifications = []
@@ -141,7 +142,6 @@ def logout_user(request):
     else:
         return redirect('home')
     
-
 def register_user(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
