@@ -10,6 +10,11 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_record' %}">Kayıt Ekle</a>
+          </li>
+
+
+          <li class="nav-item">
             <a class="nav-link" href=" {% url "logout" %} ">Çıkış Yap</a>
           </li>
 
