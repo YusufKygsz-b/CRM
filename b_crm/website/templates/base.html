@@ -15,10 +15,10 @@
         {% if notifications %}
         
         {% for notification in notifications %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <div  class="alert alert-info alert-dismissible fade show" role="alert">
           <strong>Bildirim:</strong> {{ notification.verb }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-id="{{ notification.id }}"></button>
-        </div>
+      </div>
         {% endfor %}
         
         {% endif %}
@@ -53,24 +53,24 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const socket = new WebSocket('ws://' + window.location.host + '/ws/notifications/');
-  
-          socket.onmessage = function(e) {
-              const data = JSON.parse(e.data);
-              const verb = data['verb'];
-  
-              // Bildirimi ekrana ekleyin
-              const notificationArea = document.querySelector('#notification-area');
-              const notification = document.createElement('div');
-              notification.className = 'alert alert-info';
-              notification.innerText = `Yeni Bildirim: ${verb}`;
-              notificationArea.appendChild(notification);
-          };
-  
-          socket.onclose = function(e) {
-              console.error('WebSocket bağlantısı kapandı.');
-          };
+
+        socket.onmessage = function(e) {
+          const data = JSON.parse(e.data);
+          const verb = data['verb'];
+
+          // Bildirimi ekrana ekleyin
+          const notificationArea = document.querySelector('.container');
+          const notification = document.createElement('div');
+          notification.className = 'alert alert-info';
+          notification.innerText = `Yeni Bildirim: ${verb}`;
+          notificationArea.insertBefore(notification, notificationArea.firstChild);
+        };
+
+        socket.onclose = function(e) {
+          console.error('WebSocket bağlantısı kapandı.');
+        };
       });
-  </script>
-    
+    </script>
+
   </body>
 </html>
