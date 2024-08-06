@@ -17,7 +17,7 @@
         {% for notification in notifications %}
         <div class="alert alert-info alert-dismissible fade show" role="alert">
           <strong>Bildirim:</strong> {{ notification.verb }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-id="{{ notification.id }}"></button>
         </div>
         {% endfor %}
         
@@ -28,5 +28,49 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close').forEach(function(button) {
+          button.addEventListener('click', function() {
+            var notificationId = this.getAttribute('data-id');
+            fetch('/api/notifications/' + notificationId + '/mark-as-deleted/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+              }
+            }).then(response => {
+              if (response.ok) {
+                this.closest('.alert').remove();
+              }
+            });
+          });
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/notifications/');
+  
+          socket.onmessage = function(e) {
+              const data = JSON.parse(e.data);
+              const verb = data['verb'];
+  
+              // Bildirimi ekrana ekleyin
+              const notificationArea = document.querySelector('#notification-area');
+              const notification = document.createElement('div');
+              notification.className = 'alert alert-info';
+              notification.innerText = `Yeni Bildirim: ${verb}`;
+              notificationArea.appendChild(notification);
+          };
+  
+          socket.onclose = function(e) {
+              console.error('WebSocket bağlantısı kapandı.');
+          };
+      });
+  </script>
+    
   </body>
 </html>

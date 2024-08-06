@@ -5,17 +5,11 @@ import os
 from dotenv import load_dotenv
 load_dotenv() 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -30,6 +24,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'notifications',
 ]
 
@@ -38,14 +33,13 @@ LOCAL_APPS = [
     ]
 
 THIRD_PARTY_APPS = [
+    "daphne",
     "unfold", 
     "admin_honeypot",
     "honeypot",
 ]
 
-
 INSTALLED_APPS = THIRD_PARTY_APPS +  DJANGO_APPS + LOCAL_APPS 
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,7 +69,15 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'b_crm.wsgi.application'
+
+
+ASGI_APPLICATION = 'b_crm.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 
 # Database
@@ -118,6 +120,9 @@ UNFOLD = {
     ],
 }
 
+DJANGO_NOTIFICATIONS_CONFIG = {
+    'SOFT_DELETE': True,
+}
 
 
 # Password validation
@@ -161,3 +166,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
