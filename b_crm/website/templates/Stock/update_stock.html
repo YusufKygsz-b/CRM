@@ -1,0 +1,68 @@
+{% extends "Stock/none-base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-primary">Update Stock</h1>
+  <div class="card">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="{{ form.product.id_for_label }}" class="form-label">Product</label>
+            <select id="{{ form.product.id_for_label }}" name="{{ form.product.html_name }}" class="form-select" required>
+              {% for product in products %}
+                <option value="{{ product.pk }}" {% if product.pk == form.product.value %}selected{% endif %}>{{ product.name }}</option>
+              {% endfor %}
+            </select>
+            {% if form.product.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.product.errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="{{ form.entry_date.id_for_label }}" class="form-label">Entry Date</label>
+            <input type="date" id="{{ form.entry_date.id_for_label }}" name="{{ form.entry_date.html_name }}" class="form-control" value="{{ form.entry_date.value|date:'Y-m-d' }}" required>
+            {% if form.entry_date.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.entry_date.errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="{{ form.exit_date.id_for_label }}" class="form-label">Exit Date (Optional)</label>
+            <input type="date" id="{{ form.exit_date.id_for_label }}" name="{{ form.exit_date.html_name }}" class="form-control" value="{{ form.exit_date.value|date:'Y-m-d' }}">
+            {% if form.exit_date.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.exit_date.errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="{{ form.quantity.id_for_label }}" class="form-label">Quantity</label>
+            <input type="number" id="{{ form.quantity.id_for_label }}" name="{{ form.quantity.html_name }}" class="form-control" value="{{ form.quantity.value }}" required>
+            {% if form.quantity.errors %}
+              <div class="invalid-feedback">
+                {% for error in form.quantity.errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <button type="submit" class="btn btn-primary">Update Stock</button>
+          <a href="{% url 'stock_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

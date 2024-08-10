@@ -1,0 +1,16 @@
+{% extends "Stock/none-base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-primary">Stock Detail</h1>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ stock.product.name }}</h5>
+      <p class="card-text"><strong>Entry Date:</strong> {{ stock.entry_date }}</p>
+      <p class="card-text"><strong>Exit Date:</strong> {% if stock.exit_date %}{{ stock.exit_date }}{% else %}Not Exited{% endif %}</p>
+      <p class="card-text"><strong>Quantity:</strong> {{ stock.quantity }}</p>
+      <a href="{% url 'update_stock' stock.pk %}" class="btn btn-warning">Edit</a>
+      <a href="{% url 'stock_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -32,7 +32,6 @@ class SignUpForm(UserCreationForm):
 		self.fields['password2'].label = ''
 		self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Doğrulama için öncekiyle aynı şifreyi girin.</small></span>'	
 
-
 # Create Add Record Form
 class AddRecordForm(forms.ModelForm):
 	first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="")
@@ -47,3 +46,27 @@ class AddRecordForm(forms.ModelForm):
 	class Meta:
 		model = Record
 		exclude = ("user",)
+
+
+## Stock Managments Forms ##
+from django import forms
+from .models import Supplier, Product, Stock
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = '__all__'
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+class StockForm(forms.ModelForm):
+    class Meta:
+        model = Stock
+        fields = ['product', 'entry_date', 'exit_date', 'quantity']
+        widgets = {
+            'entry_date': forms.DateInput(attrs={'type': 'date'}),
+            'exit_date': forms.DateInput(attrs={'type': 'date'}),
+        }

@@ -1,0 +1,42 @@
+{% extends "Stock/none-base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-success">Stock List</h1>
+  <a href="{% url 'add_stock' %}" class="btn btn-success mb-3">Add Stock</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Entry Date</th>
+        <th>Exit Date</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stock in stocks %}
+      <tr>
+        <td>{{ stock.product.name }}</td>
+        <td>{{ stock.entry_date }}</td>
+        <td>
+          {% if stock.exit_date %}
+            {{ stock.exit_date }}
+          {% else %}
+            Not Exited
+          {% endif %}
+        </td>
+        <td>{{ stock.quantity }}</td>
+        <td>
+          <a href="{% url 'stock_detail' stock.pk %}" class="btn btn-info btn-sm">View</a>
+          <a href="{% url 'update_stock' stock.pk %}" class="btn btn-warning btn-sm">Edit</a>
+          <form action="{% url 'delete_stock' stock.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

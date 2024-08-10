@@ -1,0 +1,42 @@
+{% extends "Product/none-base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Add Product</h1>
+    <form method="post" action="{% url 'add_product' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="supplier" class="form-label">Supplier</label>
+            <select class="form-select" id="supplier" name="supplier" required>
+                {% for supplier in suppliers %}
+                <option value="{{ supplier.id }}">{{ supplier.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="sale_price" class="form-label">Sale Price</label>
+            <input type="number" step="0.01" class="form-control" id="sale_price" name="sale_price" required>
+        </div>
+        <div class="mb-3">
+            <label for="arrival_date" class="form-label">Arrival Date</label>
+            <input type="date" class="form-control" id="arrival_date" name="arrival_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="processing_start_date" class="form-label">Processing Start Date</label>
+            <input type="date" class="form-control" id="processing_start_date" name="processing_start_date">
+        </div>
+        <div class="mb-3">
+            <label for="processing_end_date" class="form-label">Processing End Date</label>
+            <input type="date" class="form-control" id="processing_end_date" name="processing_end_date">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
+{% endblock %}

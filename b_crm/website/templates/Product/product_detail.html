@@ -1,0 +1,106 @@
+{% extends "Product/none-base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1>Product Details</h1>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Name:</h4>
+          <p class="card-text">{{ product.name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Description:</h4>
+          <p class="card-text">{{ product.description|default:"No description provided" }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Supplier:</h4>
+          <p class="card-text">{{ product.supplier.name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Sale Price:</h4>
+          <p class="card-text">₺{{ product.sale_price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Arrival Date:</h4>
+          <p class="card-text">{{ product.arrival_date }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Processing Start Date:</h4>
+          <p class="card-text">{{ product.processing_start_date|default:"Not started" }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Processing End Date:</h4>
+          <p class="card-text">{{ product.processing_end_date|default:"Not ended" }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Completed:</h4>
+          {% if product.is_completed %}
+            <span class="badge bg-success">Yes</span>
+          {% else %}
+            <span class="badge bg-danger">No</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% if product.is_completed %}
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Waiting Period:</h4>
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar"
+              style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+              {{ product.waiting_period }} days
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Waiting Period:</h4>
+          <p class="card-text">
+            {{ product.waiting_period }} days
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="mb-3">
+    <a href="{% url 'update_product' product.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to List</a>
+  </div>
+</div>
+{% endblock %}
