@@ -36,4 +36,4 @@ urlpatterns = [
 
 
     path('api/notifications/<int:id>/mark-as-deleted/', views.mark_as_deleted, name='mark_as_deleted'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

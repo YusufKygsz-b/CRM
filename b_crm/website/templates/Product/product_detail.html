@@ -97,10 +97,52 @@
       </div>
     </div>
     {% endif %}
+    
+    <!-- Product Image Button -->
+    {% if product.product_img %}
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Product Image:</h4>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#viewImageModal" class="btn btn-primary">View Image</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </div>
   <div class="mb-3">
     <a href="{% url 'update_product' product.pk %}" class="btn btn-warning">Edit</a>
     <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to List</a>
   </div>
 </div>
+
+<!-- View Image Modal -->
+<div class="modal fade" id="viewImageModal" tabindex="-1" aria-labelledby="viewImageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewImageModalLabel">Product Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" class="img-fluid" alt="Product Image">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var viewImageModal = document.getElementById('viewImageModal');
+    viewImageModal.addEventListener('show.bs.modal', function (event) {
+      var imageElement = viewImageModal.querySelector('#modalImage');
+      imageElement.src = '{{ product.product_img.url }}';
+    });
+  });
+</script>
+{% endblock %}
 {% endblock %}

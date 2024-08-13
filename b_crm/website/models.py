@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from PIL import Image
+from django.contrib.postgres.indexes import GinIndex
 
 class Record(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -37,7 +38,6 @@ class Supplier(models.Model):
 
 # Ürün modelini temsil eden model
 class Product(models.Model):
-    # existing fields
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
@@ -46,7 +46,7 @@ class Product(models.Model):
     processing_start_date = models.DateField(blank=True, null=True)
     processing_end_date = models.DateField(blank=True, null=True)
     is_completed = models.BooleanField(default=False)
-    image = models.ImageField(null=True, blank=True, upload_to='product_images/%Y/%m/')
+    product_img = models.ImageField(null=True, blank=True, default='default.png', upload_to='product_images/%Y/%m/')
 
     @property
     def waiting_period(self):
@@ -57,17 +57,22 @@ class Product(models.Model):
             return (today - self.arrival_date).days
 
     def save(self, *args, **kwargs):
+        # Determine completion status
         if self.processing_end_date and self.processing_end_date <= timezone.now().date():
             self.is_completed = True
         else:
             self.is_completed = False
+        
+        # Call the original save method
         super().save(*args, **kwargs)
-        if self.image:
-            img = Image.open(self.image.path)
+        
+        # Process image if present
+        if self.product_img and self.product_img.name != 'default.png':
+            img = Image.open(self.product_img.path)
             if img.height > 600 or img.width > 600:
                 output_size = (600, 600)
                 img.thumbnail(output_size)
-                img.save(self.image.path)
+                img.save(self.product_img.path)
 
     def __str__(self):
         return self.name

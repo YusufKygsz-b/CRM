@@ -3,6 +3,18 @@
 {% block content %}
 <h1>Suppliers</h1>
 <a href="{% url 'add_supplier' %}" class="btn btn-primary">Add Supplier</a>
+
+<!-- Add a spacer -->
+<div class="mb-4"></div>
+
+<!-- Search form -->
+<form method="get" action="{% url 'supplier_list' %}" class="mb-3">
+  <div class="input-group">
+    <input type="text" name="q" class="form-control" placeholder="Search suppliers..." value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+</form>
+
 <table class="table">
   <thead>
     <tr>

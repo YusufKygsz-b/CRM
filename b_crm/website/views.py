@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.db.models import Q
+import unicodedata
 
 def send_notification_to_all_users(verb):
     channel_layer = get_channel_layer()
@@ -134,15 +137,35 @@ def mark_as_deleted(request, id):
 
 
 ## Supplier Managment Views Code ## 
-
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Supplier, Product, Stock
 from .forms import SupplierForm, ProductForm, StockForm
 
+def normalize_text(text):
+    # Unicode karakterleri normalize eder
+    text = unicodedata.normalize('NFKD', text)
+    return text.lower()
+
+def adjust_query_for_i(query):
+    # Küçük "i" ve büyük "İ" ile arama yapacak şekilde sorguyu ayarla
+    query_with_i = query
+    query_with_I = query.replace('i', 'İ')
+    return Q(name__icontains=query_with_i) | Q(city__icontains=query_with_i) | \
+           Q(name__icontains=query_with_I) | Q(city__icontains=query_with_I)
 # Supplier Views
+
 def supplier_list(request):
-    suppliers = Supplier.objects.all()
+    query = request.GET.get('q', '').strip()
+    if query:
+        suppliers = Supplier.objects.filter(Q(name__icontains=query) | Q(city__icontains=query)) 
+        if not suppliers.exists():
+            normalized_query = normalize_text(query)
+            search_filter = adjust_query_for_i(normalized_query)
+            suppliers = Supplier.objects.filter(search_filter)
+    else:
+        suppliers = Supplier.objects.all()
     return render(request, 'Supplier/supplier_list.html', {'suppliers': suppliers})
+
 
 def supplier_detail(request, pk):
     supplier = get_object_or_404(Supplier, pk=pk)
@@ -199,20 +222,6 @@ def product_list(request):
     }
     return render(request, 'Product/product_list.html', context)
 
-
-
-def update_product(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            form.save()
-            return redirect('product_list')
-    else:
-        form = ProductForm(instance=product)
-    return render(request, 'Product/update_product.html', {'form': form, 'product': product})
-
-
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'Product/product_detail.html', {'product': product})
@@ -232,15 +241,14 @@ def add_product(request):
 def update_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             return redirect('product_list')
     else:
         form = ProductForm(instance=product)
     suppliers = Supplier.objects.all()  # Fetch all suppliers
-    return render(request, 'Product/update_product.html', {'product': product, 'suppliers': suppliers})
-
+    return render(request, 'Product/update_product.html', {'form': form, 'suppliers': suppliers, 'product': product})
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product.delete()
