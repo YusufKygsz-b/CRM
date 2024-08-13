@@ -35,22 +35,16 @@ THIRD_PARTY_APPS = [
     "unfold", 
     "admin_honeypot",
     "honeypot",
+    'parler',
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS +  DJANGO_APPS + LOCAL_APPS 
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
-    },
-}
-
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,7 +69,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 
 ASGI_APPLICATION = 'b_crm.asgi.application'
@@ -175,11 +168,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+from django.utils.translation import gettext_lazy as _
 
+LANGUAGE_CODE = 'en'
 
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'yusufkygsz.b@gmail.com'
-# EMAIL_HOST_PASSWORD = '...'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+LANGUAGES = (
+    ('en', _('English')),
+    ('fr', _('French')),
+)

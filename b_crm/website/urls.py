@@ -3,7 +3,6 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('logout/', views.logout_user, name='logout'),
@@ -33,7 +32,6 @@ urlpatterns = [
     path('stocks/add/', views.add_stock, name='add_stock'),
     path('stocks/<int:pk>/edit/', views.update_stock, name='update_stock'),
     path('stocks/<int:pk>/delete/', views.delete_stock, name='delete_stock'),
-
 
     path('api/notifications/<int:id>/mark-as-deleted/', views.mark_as_deleted, name='mark_as_deleted'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

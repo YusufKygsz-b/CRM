@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from PIL import Image
-from django.contrib.postgres.indexes import GinIndex
 
 class Record(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,7 +20,6 @@ class Record(models.Model):
     class Meta:
         verbose_name = 'Kayıt'
         verbose_name_plural = 'Kayıtlar'
-
 
 class Supplier(models.Model):
     name = models.CharField(max_length=255)
@@ -77,7 +75,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-
 # Stok modelini temsil eden model
 class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='stocks')

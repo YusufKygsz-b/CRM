@@ -9,9 +9,9 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.db.models import Q
 import unicodedata
+from django.utils.translation import gettext as _
 
 def send_notification_to_all_users(verb):
     channel_layer = get_channel_layer()
@@ -164,7 +164,11 @@ def supplier_list(request):
             suppliers = Supplier.objects.filter(search_filter)
     else:
         suppliers = Supplier.objects.all()
-    return render(request, 'Supplier/supplier_list.html', {'suppliers': suppliers})
+        trans = _('hello')
+    return render(request, 'Supplier/supplier_list.html',
+                   {'suppliers': suppliers, 'trans': trans})
+
+
 
 
 def supplier_detail(request, pk):
