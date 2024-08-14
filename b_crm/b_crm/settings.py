@@ -24,6 +24,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'notifications',
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
@@ -163,9 +164,6 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from django.utils.translation import gettext_lazy as _
@@ -176,3 +174,14 @@ LANGUAGES = (
     ('en', _('English')),
     ('fr', _('French')),
 )
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+) 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.SearchFilter',
+    ),
+}

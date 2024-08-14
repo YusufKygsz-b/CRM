@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-14 09:37+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\b_crm\settings.py:173
+msgid "English"
+msgstr ""
+
+#: .\b_crm\settings.py:174
+msgid "French"
+msgstr ""
+
+#: .\b_crm\urls.py:7
+msgid "admin/"
+msgstr ""
+
+#: .\website\templates\Supplier\supplier_list.html:5
+msgid "Suppliers"
+msgstr "Fournisseurs"
+
+#: .\website\templates\Supplier\supplier_list.html:33
+msgid "Add Supplier"
+msgstr "Ajouter un fournisseur"
+
+#: .\website\templates\Supplier\supplier_list.html:41
+msgid "Search suppliers..."
+msgstr "Recherche de fournisseurs..."
+
+#: .\website\templates\Supplier\supplier_list.html:42
+msgid "Search"
+msgstr "Recherche"
+
+#: .\website\templates\Supplier\supplier_list.html:49
+msgid "Name"
+msgstr "Nom"
+
+#: .\website\templates\Supplier\supplier_list.html:50
+msgid "City"
+msgstr "Ville"
+
+#: .\website\templates\Supplier\supplier_list.html:51
+msgid "Actions"
+msgstr "Actions"
+
+#: .\website\templates\Supplier\supplier_list.html:60
+msgid "View"
+msgstr "Voir"
+
+#: .\website\templates\Supplier\supplier_list.html:61
+msgid "Edit"
+msgstr "Editer"
+
+#: .\website\templates\Supplier\supplier_list.html:63
+msgid "Are you sure you want to delete this supplier?"
+msgstr "Êtes-vous sûr de vouloir supprimer ce fournisseur ?"
+
+#: .\website\templates\Supplier\supplier_list.html:65
+msgid "Delete"
+msgstr "Supprimer"
+
+#: .\website\views.py:162
+msgid "hello"
+msgstr "Bonjour"

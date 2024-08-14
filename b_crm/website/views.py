@@ -12,6 +12,13 @@ from asgiref.sync import async_to_sync
 from django.db.models import Q
 import unicodedata
 from django.utils.translation import gettext as _
+from django.utils.translation import get_language, activate, gettext
+
+from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
+from .models import Supplier
+from .serializers import SupplierSerializer
+from django_filters.rest_framework import DjangoFilterBackend
 
 def send_notification_to_all_users(verb):
     channel_layer = get_channel_layer()
@@ -154,19 +161,36 @@ def adjust_query_for_i(query):
            Q(name__icontains=query_with_I) | Q(city__icontains=query_with_I)
 # Supplier Views
 
+def translate(language):
+    cur_language = get_language()
+    try:
+        activate(language)
+        text = gettext('hello')
+    finally:
+        activate(cur_language)
+    return text
+
 def supplier_list(request):
     query = request.GET.get('q', '').strip()
+    trans = None  # Varsayılan değer atayın
     if query:
-        suppliers = Supplier.objects.filter(Q(name__icontains=query) | Q(city__icontains=query)) 
+        suppliers = Supplier.objects.filter(Q(name__icontains=query) | Q(city__icontains=query))
         if not suppliers.exists():
             normalized_query = normalize_text(query)
             search_filter = adjust_query_for_i(normalized_query)
             suppliers = Supplier.objects.filter(search_filter)
     else:
         suppliers = Supplier.objects.all()
-        trans = _('hello')
+        trans = translate(language='fr')  # `trans` değerini burada alabilirsiniz
+        
     return render(request, 'Supplier/supplier_list.html',
-                   {'suppliers': suppliers, 'trans': trans})
+                  {'suppliers': suppliers, 'trans': trans})
+
+class SupplierViewSet(viewsets.ModelViewSet):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
+    filter_backends = (SearchFilter, DjangoFilterBackend)
+    search_fields = ('name', 'city')  # Arama yapabileceğiniz alanlar
 
 
 
