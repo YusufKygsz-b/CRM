@@ -1,16 +1,18 @@
 {% extends "Supplier/none-base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 <div class="container mt-4">
-  <h1>Edit Supplier</h1>
+  <h1>{% trans "Edit Supplier" %}</h1>
   <div class="card">
     <div class="card-body">
       <form method="post">
         {% csrf_token %}
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
-            <input type="text" id="{{ form.name.id_for_label }}" name="{{ form.name.html_name }}" class="form-control" value="{{ form.name.value }}">
+            <label for="{{ form.name.id_for_label }}" class="form-label">{% trans "Name" %}</label>
+            <input type="text" id="{{ form.name.id_for_label }}" name="{{ form.name.html_name }}" class="form-control {% if form.name.errors %}is-invalid{% endif %}" value="{{ form.name.value|default_if_none:'' }}">
             {% if form.name.errors %}
               <div class="invalid-feedback">
                 {% for error in form.name.errors %}
@@ -20,8 +22,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.city.id_for_label }}" class="form-label">City</label>
-            <input type="text" id="{{ form.city.id_for_label }}" name="{{ form.city.html_name }}" class="form-control" value="{{ form.city.value }}">
+            <label for="{{ form.city.id_for_label }}" class="form-label">{% trans "City" %}</label>
+            <input type="text" id="{{ form.city.id_for_label }}" name="{{ form.city.html_name }}" class="form-control {% if form.city.errors %}is-invalid{% endif %}" value="{{ form.city.value|default_if_none:'' }}">
             {% if form.city.errors %}
               <div class="invalid-feedback">
                 {% for error in form.city.errors %}
@@ -31,8 +33,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.district.id_for_label }}" class="form-label">District</label>
-            <input type="text" id="{{ form.district.id_for_label }}" name="{{ form.district.html_name }}" class="form-control" value="{{ form.district.value }}">
+            <label for="{{ form.district.id_for_label }}" class="form-label">{% trans "District" %}</label>
+            <input type="text" id="{{ form.district.id_for_label }}" name="{{ form.district.html_name }}" class="form-control {% if form.district.errors %}is-invalid{% endif %}" value="{{ form.district.value|default_if_none:'' }}">
             {% if form.district.errors %}
               <div class="invalid-feedback">
                 {% for error in form.district.errors %}
@@ -42,8 +44,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.address.id_for_label }}" class="form-label">Address</label>
-            <input type="text" id="{{ form.address.id_for_label }}" name="{{ form.address.html_name }}" class="form-control" value="{{ form.address.value }}">
+            <label for="{{ form.address.id_for_label }}" class="form-label">{% trans "Address" %}</label>
+            <input type="text" id="{{ form.address.id_for_label }}" name="{{ form.address.html_name }}" class="form-control {% if form.address.errors %}is-invalid{% endif %}" value="{{ form.address.value|default_if_none:'' }}">
             {% if form.address.errors %}
               <div class="invalid-feedback">
                 {% for error in form.address.errors %}
@@ -53,8 +55,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.contact_number.id_for_label }}" class="form-label">Contact Number</label>
-            <input type="text" id="{{ form.contact_number.id_for_label }}" name="{{ form.contact_number.html_name }}" class="form-control" value="{{ form.contact_number.value }}">
+            <label for="{{ form.contact_number.id_for_label }}" class="form-label">{% trans "Contact Number" %}</label>
+            <input type="text" id="{{ form.contact_number.id_for_label }}" name="{{ form.contact_number.html_name }}" class="form-control {% if form.contact_number.errors %}is-invalid{% endif %}" value="{{ form.contact_number.value|default_if_none:'' }}">
             {% if form.contact_number.errors %}
               <div class="invalid-feedback">
                 {% for error in form.contact_number.errors %}
@@ -64,8 +66,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.contact_person_first_name.id_for_label }}" class="form-label">Contact Person First Name</label>
-            <input type="text" id="{{ form.contact_person_first_name.id_for_label }}" name="{{ form.contact_person_first_name.html_name }}" class="form-control" value="{{ form.contact_person_first_name.value }}">
+            <label for="{{ form.contact_person_first_name.id_for_label }}" class="form-label">{% trans "Contact Person First Name" %}</label>
+            <input type="text" id="{{ form.contact_person_first_name.id_for_label }}" name="{{ form.contact_person_first_name.html_name }}" class="form-control {% if form.contact_person_first_name.errors %}is-invalid{% endif %}" value="{{ form.contact_person_first_name.value|default_if_none:'' }}">
             {% if form.contact_person_first_name.errors %}
               <div class="invalid-feedback">
                 {% for error in form.contact_person_first_name.errors %}
@@ -75,8 +77,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.contact_person_last_name.id_for_label }}" class="form-label">Contact Person Last Name</label>
-            <input type="text" id="{{ form.contact_person_last_name.id_for_label }}" name="{{ form.contact_person_last_name.html_name }}" class="form-control" value="{{ form.contact_person_last_name.value }}">
+            <label for="{{ form.contact_person_last_name.id_for_label }}" class="form-label">{% trans "Contact Person Last Name" %}</label>
+            <input type="text" id="{{ form.contact_person_last_name.id_for_label }}" name="{{ form.contact_person_last_name.html_name }}" class="form-control {% if form.contact_person_last_name.errors %}is-invalid{% endif %}" value="{{ form.contact_person_last_name.value|default_if_none:'' }}">
             {% if form.contact_person_last_name.errors %}
               <div class="invalid-feedback">
                 {% for error in form.contact_person_last_name.errors %}
@@ -86,8 +88,8 @@
             {% endif %}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="{{ form.mobile_number.id_for_label }}" class="form-label">Mobile Number</label>
-            <input type="text" id="{{ form.mobile_number.id_for_label }}" name="{{ form.mobile_number.html_name }}" class="form-control" value="{{ form.mobile_number.value }}">
+            <label for="{{ form.mobile_number.id_for_label }}" class="form-label">{% trans "Mobile Number" %}</label>
+            <input type="text" id="{{ form.mobile_number.id_for_label }}" name="{{ form.mobile_number.html_name }}" class="form-control {% if form.mobile_number.errors %}is-invalid{% endif %}" value="{{ form.mobile_number.value|default_if_none:'' }}">
             {% if form.mobile_number.errors %}
               <div class="invalid-feedback">
                 {% for error in form.mobile_number.errors %}
@@ -98,8 +100,8 @@
           </div>
         </div>
         <div class="d-flex justify-content-between mt-3">
-          <button type="submit" class="btn btn-primary">Update</button>
-          <a href="{% url 'supplier_list' %}" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+          <a href="{% url 'supplier_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
         </div>
       </form>
     </div>

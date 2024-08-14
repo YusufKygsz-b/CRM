@@ -193,11 +193,11 @@ class SupplierViewSet(viewsets.ModelViewSet):
     search_fields = ('name', 'city')  # Arama yapabileceğiniz alanlar
 
 
-
-
 def supplier_detail(request, pk):
     supplier = get_object_or_404(Supplier, pk=pk)
-    return render(request, 'Supplier/supplier_detail.html', {'supplier': supplier})
+    trans = translate(language='en')  # Varsayılan dil ayarı, burada 'fr' (Fransızca) kullanılıyor.
+    return render(request, 'Supplier/supplier_detail.html', {'supplier': supplier, 'trans': trans})
+
 
 def add_supplier(request):
     if request.method == "POST":
