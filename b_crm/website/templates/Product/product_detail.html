@@ -1,12 +1,14 @@
 {% extends "Product/none-base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="container mt-4">
-  <h1>Product Details</h1>
+  <h1>{% trans "Product Details" %}</h1>
   <div class="row">
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Name:</h4>
+          <h4 class="card-title">{% trans "Name:" %}</h4>
           <p class="card-text">{{ product.name }}</p>
         </div>
       </div>
@@ -14,15 +16,15 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Description:</h4>
-          <p class="card-text">{{ product.description|default:"No description provided" }}</p>
+          <h4 class="card-title">{% trans "Description:" %}</h4>
+          <p class="card-text">{{ product.description|default:"{% trans 'No description provided' %}" }}</p>
         </div>
       </div>
     </div>
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Supplier:</h4>
+          <h4 class="card-title">{% trans "Supplier:" %}</h4>
           <p class="card-text">{{ product.supplier.name }}</p>
         </div>
       </div>
@@ -30,7 +32,7 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Sale Price:</h4>
+          <h4 class="card-title">{% trans "Sale Price:" %}</h4>
           <p class="card-text">₺{{ product.sale_price }}</p>
         </div>
       </div>
@@ -38,7 +40,7 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Arrival Date:</h4>
+          <h4 class="card-title">{% trans "Arrival Date:" %}</h4>
           <p class="card-text">{{ product.arrival_date }}</p>
         </div>
       </div>
@@ -46,15 +48,15 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Processing Start Date:</h4>
-          <p class="card-text">{{ product.processing_start_date|default:"Not started" }}</p>
+          <h4 class="card-title">{% trans "Processing Start Date:" %}</h4>
+          <p class="card-text">{{ product.processing_start_date|default:"{% trans 'Not started' %}" }}</p>
         </div>
       </div>
     </div>
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Processing End Date:</h4>
+          <h4 class="card-title">{% trans "Processing End Date:" %}</h4>
           <p class="card-text">{{ product.processing_end_date|default:"Not ended" }}</p>
         </div>
       </div>
@@ -62,11 +64,11 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Completed:</h4>
+          <h4 class="card-title">{% trans "Completed:" %}</h4>
           {% if product.is_completed %}
-            <span class="badge bg-success">Yes</span>
+            <span class="badge bg-success">{% trans "Yes" %}</span>
           {% else %}
-            <span class="badge bg-danger">No</span>
+            <span class="badge bg-danger">{% trans "No" %}</span>
           {% endif %}
         </div>
       </div>
@@ -75,11 +77,11 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Waiting Period:</h4>
+          <h4 class="card-title">{% trans "Waiting Period:" %}</h4>
           <div class="progress">
             <div class="progress-bar bg-success" role="progressbar"
               style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-              {{ product.waiting_period }} days
+              {{ product.waiting_period }} {% trans "days" %}
             </div>
           </div>
         </div>
@@ -89,9 +91,9 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Waiting Period:</h4>
+          <h4 class="card-title">{% trans "Waiting Period:" %}</h4>
           <p class="card-text">
-            {{ product.waiting_period }} days
+            {{ product.waiting_period }} {% trans "days" %}
           </p>
         </div>
       </div>
@@ -103,16 +105,16 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Product Image:</h4>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#viewImageModal" class="btn btn-primary">View Image</a>
+          <h4 class="card-title">{% trans "Product Image:" %}</h4>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#viewImageModal" class="btn btn-primary">{% trans "View Image" %}</a>
         </div>
       </div>
     </div>
     {% endif %}
   </div>
   <div class="mb-3">
-    <a href="{% url 'update_product' product.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to List</a>
+    <a href="{% url 'update_product' product.pk %}" class="btn btn-warning">{% trans "Edit" %}</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">{% trans "Back to List" %}</a>
   </div>
 </div>
 
@@ -121,14 +123,14 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="viewImageModalLabel">Product Image</h5>
+        <h5 class="modal-title" id="viewImageModalLabel">{% trans "Product Image" %}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <img id="modalImage" src="" class="img-fluid" alt="Product Image">
+        <img id="modalImage" src="" class="img-fluid" alt="{% trans 'Product Image' %}">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
       </div>
     </div>
   </div>
@@ -146,3 +148,5 @@
 </script>
 {% endblock %}
 {% endblock %}
+
+

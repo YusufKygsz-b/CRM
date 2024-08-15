@@ -1,11 +1,13 @@
 {% extends "Stock/none-base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="container mt-4">
-  <h1 class="text-primary">Add Stock</h1>
+  <h1 class="text-primary">{% trans "Add Stock" %}</h1>
   <form method="post">
     {% csrf_token %}
     <div class="mb-3">
-      <label for="product" class="form-label">Product</label>
+      <label for="product" class="form-label">{% trans "Product" %}</label>
       <select class="form-select" id="product" name="product" required>
         {% for product in products %}
         <option value="{{ product.pk }}">{{ product.name }}</option>
@@ -13,19 +15,19 @@
       </select>
     </div>
     <div class="mb-3">
-      <label for="entry_date" class="form-label">Entry Date</label>
+      <label for="entry_date" class="form-label">{% trans "Entry Date" %}</label>
       <input type="date" class="form-control" id="entry_date" name="entry_date" required>
     </div>
     <div class="mb-3">
-      <label for="exit_date" class="form-label">Exit Date (Optional)</label>
+      <label for="exit_date" class="form-label">{% trans "Exit Date (Optional)" %}</label>
       <input type="date" class="form-control" id="exit_date" name="exit_date">
     </div>
     <div class="mb-3">
-      <label for="quantity" class="form-label">Quantity</label>
+      <label for="quantity" class="form-label">{% trans "Quantity" %}</label>
       <input type="number" class="form-control" id="quantity" name="quantity" required>
     </div>
-    <button type="submit" class="btn btn-success">Add Stock</button>
-    <a href="{% url 'stock_list' %}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-success">{% trans "Add Stock" %}</button>
+    <a href="{% url 'stock_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
   </form>
 </div>
 {% endblock %}

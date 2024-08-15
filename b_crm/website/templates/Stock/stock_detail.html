@@ -1,4 +1,6 @@
 {% extends "Stock/none-base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="container mt-4">
   <div class="row">
@@ -8,18 +10,18 @@
           <h1 class="card-title text-primary mb-3">{{ stock.product.name }}</h1>
           <div class="row mb-3">
             <div class="col-md-6">
-              <p class="card-text"><strong>Entry Date:</strong> {{ stock.entry_date }}</p>
+              <p class="card-text"><strong>{% trans "Entry Date" %}:</strong> {{ stock.entry_date }}</p>
             </div>
             <div class="col-md-6">
-              <p class="card-text"><strong>Exit Date:</strong> {% if stock.exit_date %}{{ stock.exit_date }}{% else %}Not Exited{% endif %}</p>
+              <p class="card-text"><strong>{% trans "Exit Date" %}:</strong> {% if stock.exit_date %}{{ stock.exit_date }}{% else %}{% trans "Not Exited" %}{% endif %}</p>
             </div>
           </div>
           <div class="mb-3">
-            <p class="card-text"><strong>Quantity:</strong> {{ stock.quantity }}</p>
+            <p class="card-text"><strong>{% trans "Quantity" %}:</strong> {{ stock.quantity }}</p>
           </div>
           <div class="d-flex justify-content-between">
-            <a href="{% url 'update_stock' stock.pk %}" class="btn btn-warning">Edit</a>
-            <a href="{% url 'stock_list' %}" class="btn btn-secondary">Back to List</a>
+            <a href="{% url 'update_stock' stock.pk %}" class="btn btn-warning">{% trans "Edit" %}</a>
+            <a href="{% url 'stock_list' %}" class="btn btn-secondary">{% trans "Back to List" %}</a>
           </div>
         </div>
       </div>

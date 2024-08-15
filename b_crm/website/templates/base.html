@@ -57,7 +57,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <script>
+    {% comment %} <script>
       document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.btn-close').forEach(function(button) {
           button.addEventListener('click', function() {
@@ -140,7 +140,93 @@
           console.error('WebSocket bağlantısı kapandı.');
         };
       });
-    </script>
+    </script> {% endcomment %}
     
+
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.btn-close').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var notificationId = this.getAttribute('data-id');
+        fetch('/api/notifications/' + notificationId + '/mark-as-deleted/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: JSON.stringify({}) // Boş bir JSON nesnesi gönderiyoruz
+        }).then(response => {
+          if (response.ok) {
+            this.closest('.alert').remove();
+            // Güncel bildirim sayısını güncelle
+            const notificationCountElem = document.querySelector('#notificationCount');
+            if (notificationCountElem) {
+              let currentCount = parseInt(notificationCountElem.textContent, 10);
+              if (!isNaN(currentCount)) {
+                notificationCountElem.textContent = currentCount - 1;
+              }
+            }
+          }
+        });
+      });
+    });
+
+    // WebSocket bağlantısı ve bildirim güncelleme
+    const notificationCountElem = document.querySelector('#notificationCount');
+    const socket = new WebSocket('ws://' + window.location.host + '/ws/notifications/');
+
+    if (!notificationCountElem) {
+      console.error('Element with id "notificationCount" not found.');
+      return;
+    }
+
+    socket.onmessage = function(e) {
+      const data = JSON.parse(e.data);
+      const verb = data['verb'];
+      const notificationId = data['id']; // WebSocket mesajından ID'yi al
+
+      // Bildirim sayısını güncelle
+      let currentCount = parseInt(notificationCountElem.textContent, 10);
+      if (isNaN(currentCount)) {
+        currentCount = 0;
+      }
+      notificationCountElem.textContent = currentCount + 1;
+
+      // Yeni bildirimi listeye ekle
+      const notificationArea = document.querySelector('#notificationList');
+      const notification = document.createElement('div');
+      notification.className = 'alert alert-info alert-dismissible fade show';
+      notification.innerHTML = `Yeni Bildirim: ${verb} <button type="button" class="btn-close float-end" aria-label="Close" data-id="${notificationId}"></button>`;
+      notificationArea.insertBefore(notification, notificationArea.firstChild);
+      
+      // Yeni bildirim için kapatma butonuna olay dinleyici ekle
+      notification.querySelector('.btn-close').addEventListener('click', function() {
+        fetch('/api/notifications/' + notificationId + '/mark-as-deleted/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: JSON.stringify({})
+        }).then(response => {
+          if (response.ok) {
+            notification.remove();
+            // Güncel bildirim sayısını güncelle
+            let currentCount = parseInt(notificationCountElem.textContent, 10);
+            if (!isNaN(currentCount)) {
+              notificationCountElem.textContent = currentCount - 1;
+            }
+          }
+        });
+      });
+    };
+
+    socket.onclose = function(e) {
+      console.error('WebSocket bağlantısı kapandı.');
+    };
+  });
+</script>
+
+
   </body>
 </html>

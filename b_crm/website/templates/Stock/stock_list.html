@@ -1,16 +1,18 @@
 {% extends "Stock/none-base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="container mt-4">
-  <h1 class="text-success">Stock List</h1>
-  <a href="{% url 'add_stock' %}" class="btn btn-success mb-3">Add Stock</a>
+  <h1 class="text-success">{% trans "Stock List" %}</h1>
+  <a href="{% url 'add_stock' %}" class="btn btn-success mb-3">{% trans "Add Stock" %}</a>
   <table class="table table-bordered table-hover">
     <thead class="table-dark">
       <tr>
-        <th>Product</th>
-        <th>Entry Date</th>
-        <th>Exit Date</th>
-        <th>Quantity</th>
-        <th>Actions</th>
+        <th>{% trans "Product" %}</th>
+        <th>{% trans "Entry Date" %}</th>
+        <th>{% trans "Exit Date" %}</th>
+        <th>{% trans "Quantity" %}</th>
+        <th>{% trans "Actions" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -22,22 +24,21 @@
           {% if stock.exit_date %}
             {{ stock.exit_date }}
           {% else %}
-            Not Exited
+            {% trans "Not Exited" %}
           {% endif %}
         </td>
         <td>{{ stock.quantity }}</td>
         <td>
-          <!-- View butonunu stock_detail sayfasına yönlendirecek şekilde güncelledik -->
           <a href="{% url 'stock_detail' stock.pk %}" class="btn btn-info btn-sm me-2">
-            <i class="bi bi-eye"></i> View
+            <i class="bi bi-eye"></i> {% trans "View" %}
           </a>
           <a href="{% url 'update_stock' stock.pk %}" class="btn btn-warning btn-sm me-2">
-            <i class="bi bi-pencil"></i> Edit
+            <i class="bi bi-pencil"></i> {% trans "Edit" %}
           </a>
           <form action="{% url 'delete_stock' stock.pk %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger btn-sm">
-              <i class="bi bi-trash"></i> Delete
+              <i class="bi bi-trash"></i> {% trans "Delete" %}
             </button>
           </form>
         </td>
