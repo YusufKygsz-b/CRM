@@ -1,9 +1,10 @@
 {% extends "Product/none-base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="text-primary">Products</h1>
-    <a href="{% url 'add_product' %}" class="btn btn-primary">Add Product</a>
+    <h1 class="text-primary">{% trans "Products" %}</h1>
+    <a href="{% url 'add_product' %}" class="btn btn-primary">{% trans "Add Product" %}</a>
   </div>
   <div class="row">
     <div class="col-md-8">
@@ -12,12 +13,12 @@
           <table class="table table-striped table-hover">
             <thead class="table-dark">
               <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Supplier</th>
-                <th>Arrival Date</th>
-                <th>Completion Date</th>
-                <th>Actions</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Price" %}</th>
+                <th>{% trans "Supplier" %}</th>
+                <th>{% trans "Arrival Date" %}</th>
+                <th>{% trans "Completion Date" %}</th>
+                <th>{% trans "Actions" %}</th>
               </tr>
             </thead>
             <tbody>
@@ -31,17 +32,17 @@
                   {% if product.is_completed %}
                     {{ product.processing_end_date }}
                   {% else %}
-                    In Progress
+                    {% trans "In Progress" %}
                   {% endif %}
                 </td>
                 <td>
                   <div class="d-flex">
-                    <a href="{% url 'product_detail' product.pk %}" class="btn btn-info btn-sm me-2">View</a>
-                    <a href="{% url 'update_product' product.pk %}" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <a href="{% url 'product_detail' product.pk %}" class="btn btn-info btn-sm me-2">{% trans "View" %}</a>
+                    <a href="{% url 'update_product' product.pk %}" class="btn btn-warning btn-sm me-2">{% trans "Edit" %}</a>
                     <button type="button" class="btn btn-secondary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#viewImageModal{{ product.pk }}" data-img="{{ product.product_img.url }}">
-                      <i class="bi bi-image"></i> Image
+                      <i class="bi bi-image"></i> {% trans "Image" %}
                     </button>
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-url="{% url 'delete_product' product.pk %}">Delete</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-url="{% url 'delete_product' product.pk %}">{% trans "Delete" %}</button>
                   </div>
                 </td>
               </tr>
@@ -54,11 +55,11 @@
     <div class="col-md-4">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h4 class="card-title">Earnings Overview</h4>
+          <h4 class="card-title">{% trans "Earnings Overview" %}</h4>
           <canvas id="earningsChart"></canvas>
-          <p class="mt-3"><strong>Total Projected Earnings:</strong> ₺{{ total_earnings }}</p>
-          <p><strong>Completed Earnings:</strong> ₺{{ completed_earnings }}</p>
-          <p><strong>Ongoing Earnings:</strong> ₺{{ ongoing_earnings }}</p>
+          <p class="mt-3"><strong>{% trans "Total Projected Earnings:" %}</strong> ₺{{ total_earnings }}</p>
+          <p><strong>{% trans "Completed Earnings:" %}</strong> ₺{{ completed_earnings }}</p>
+          <p><strong>{% trans "Ongoing Earnings:" %}</strong> ₺{{ ongoing_earnings }}</p>
         </div>
       </div>
     </div>
@@ -71,14 +72,14 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="viewImageModalLabel{{ product.pk }}">{{ product.name }} Image</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="viewImageModalLabel{{ product.pk }}">{{ product.name }} {% trans "Image" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
       </div>
       <div class="modal-body">
         <img src="{{ product.product_img.url }}" class="img-fluid" alt="{{ product.name }}">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
       </div>
     </div>
   </div>
@@ -90,17 +91,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="confirmDeleteModalLabel">{% trans "Confirm Deletion" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Close" %}"></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete this product?
+        {% trans "Are you sure you want to delete this product?" %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
         <form method="post" id="deleteForm" style="display:inline;">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
         </form>
       </div>
     </div>
@@ -115,7 +116,7 @@
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Completed Products', 'Ongoing Products'],
+        labels: ['{% trans "Completed Products" %}', '{% trans "Ongoing Products" %}'],
         datasets: [{
           data: [{{ completed_earnings }}, {{ ongoing_earnings }}],
           backgroundColor: ['#D1E9F6', '#ffc107']

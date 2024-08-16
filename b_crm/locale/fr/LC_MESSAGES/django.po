@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-15 11:50+0300\n"
+"POT-Creation-Date: 2024-08-16 14:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,59 +31,60 @@ msgstr ""
 
 #: .\website\templates\Product\add_product.html:6
 #: .\website\templates\Product\add_product.html:41
-#, fuzzy
-#| msgid "Product"
+#: .\website\templates\Product\product_list.html:7
 msgid "Add Product"
 msgstr "Produits"
 
 #: .\website\templates\Product\add_product.html:10
-#, fuzzy
-#| msgid "Product"
+#: .\website\templates\Product\update_product.html:11
 msgid "Product Name"
 msgstr "Produits"
 
 #: .\website\templates\Product\add_product.html:14
+#: .\website\templates\Product\update_product.html:27
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: .\website\templates\Product\add_product.html:18
-#, fuzzy
-#| msgid "Suppliers"
+#: .\website\templates\Product\product_list.html:18
+#: .\website\templates\Product\update_product.html:17
 msgid "Supplier"
 msgstr "Fournisseurs"
 
 #: .\website\templates\Product\add_product.html:26
+#: .\website\templates\Product\update_product.html:33
 msgid "Sale Price"
-msgstr ""
+msgstr "Prix de vente"
 
 #: .\website\templates\Product\add_product.html:30
+#: .\website\templates\Product\product_list.html:19
+#: .\website\templates\Product\update_product.html:39
 msgid "Arrival Date"
-msgstr ""
+msgstr "Date d'arrivée"
 
 #: .\website\templates\Product\add_product.html:34
+#: .\website\templates\Product\update_product.html:47
 msgid "Processing Start Date"
-msgstr ""
+msgstr "Date de début du traitement"
 
 #: .\website\templates\Product\add_product.html:38
+#: .\website\templates\Product\update_product.html:53
 msgid "Processing End Date"
-msgstr ""
+msgstr "Date de fin de traitement"
 
 #: .\website\templates\Product\product_detail.html:6
-#| msgid "Products"
 msgid "Product Details"
 msgstr "Produits"
 
 #: .\website\templates\Product\product_detail.html:11
-#| msgid "Name"
 msgid "Name:"
 msgstr "Nom"
 
 #: .\website\templates\Product\product_detail.html:19
 msgid "Description:"
-msgstr ""
+msgstr "Description"
 
 #: .\website\templates\Product\product_detail.html:27
-#| msgid "Suppliers"
 msgid "Supplier:"
 msgstr "Fournisseurs"
 
@@ -126,7 +127,6 @@ msgid "days"
 msgstr "jours"
 
 #: .\website\templates\Product\product_detail.html:108
-#| msgid "Product"
 msgid "Product Image:"
 msgstr "Image du produit :"
 
@@ -135,6 +135,7 @@ msgid "View Image"
 msgstr "Voir l'image"
 
 #: .\website\templates\Product\product_detail.html:116
+#: .\website\templates\Product\product_list.html:41
 #: .\website\templates\Stock\stock_detail.html:23
 #: .\website\templates\Stock\stock_list.html:36
 #: .\website\templates\Supplier\supplier_detail.html:15
@@ -150,14 +151,120 @@ msgstr "Retour à la liste"
 
 #: .\website\templates\Product\product_detail.html:126
 #: .\website\templates\Product\product_detail.html:130
-#, fuzzy
-#| msgid "Product"
+#: .\website\templates\Product\update_product.html:64
 msgid "Product Image"
 msgstr "Produits"
 
 #: .\website\templates\Product\product_detail.html:133
+#: .\website\templates\Product\product_list.html:76
+#: .\website\templates\Product\product_list.html:82
+#: .\website\templates\Product\product_list.html:95
 msgid "Close"
 msgstr "Fermer"
+
+#: .\website\templates\Product\product_list.html:6
+#: .\website\templates\navbar.html:23
+msgid "Products"
+msgstr "Produits"
+
+#: .\website\templates\Product\product_list.html:16
+#: .\website\templates\Supplier\add_supplier.html:14
+#: .\website\templates\Supplier\supplier_list.html:51
+#: .\website\templates\Supplier\update_supplier.html:14
+#: .\website\templates\home.html:16
+msgid "Name"
+msgstr "Nom"
+
+#: .\website\templates\Product\product_list.html:17
+msgid "Price"
+msgstr "Prix de vente:"
+
+#: .\website\templates\Product\product_list.html:20
+msgid "Completion Date"
+msgstr "Complété :"
+
+#: .\website\templates\Product\product_list.html:21
+#: .\website\templates\Stock\stock_list.html:15
+#: .\website\templates\Supplier\supplier_list.html:53
+msgid "Actions"
+msgstr "Actions"
+
+#: .\website\templates\Product\product_list.html:35
+msgid "In Progress"
+msgstr "En cours"
+
+#: .\website\templates\Product\product_list.html:40
+#: .\website\templates\Stock\stock_list.html:33
+#: .\website\templates\Supplier\supplier_list.html:62
+msgid "View"
+msgstr "Voir"
+
+#: .\website\templates\Product\product_list.html:43
+#: .\website\templates\Product\product_list.html:75
+msgid "Image"
+msgstr "Voir l'image"
+
+#: .\website\templates\Product\product_list.html:45
+#: .\website\templates\Product\product_list.html:104
+#: .\website\templates\Stock\stock_list.html:41
+#: .\website\templates\Supplier\supplier_list.html:67
+#: .\website\templates\record.html:56
+msgid "Delete"
+msgstr "Supprimer"
+
+#: .\website\templates\Product\product_list.html:58
+msgid "Earnings Overview"
+msgstr "Aperçu des revenus"
+
+#: .\website\templates\Product\product_list.html:60
+msgid "Total Projected Earnings:"
+msgstr "Total des revenus prévus :"
+
+#: .\website\templates\Product\product_list.html:61
+msgid "Completed Earnings:"
+msgstr "Complété :"
+
+#: .\website\templates\Product\product_list.html:62
+msgid "Ongoing Earnings:"
+msgstr "Gains continus :"
+
+#: .\website\templates\Product\product_list.html:94
+msgid "Confirm Deletion"
+msgstr "Confirmer la suppression"
+
+#: .\website\templates\Product\product_list.html:98
+msgid "Are you sure you want to delete this product?"
+msgstr "Êtes-vous sûr de vouloir supprimer ce fournisseur ?"
+
+#: .\website\templates\Product\product_list.html:101
+#: .\website\templates\Product\update_product.html:73
+#: .\website\templates\Stock\add_stock.html:30
+#: .\website\templates\Stock\update_stock.html:63
+#: .\website\templates\Supplier\add_supplier.html:104
+#: .\website\templates\Supplier\update_supplier.html:104
+msgid "Cancel"
+msgstr "Annuler"
+
+#: .\website\templates\Product\product_list.html:119
+msgid "Completed Products"
+msgstr "Complété :"
+
+#: .\website\templates\Product\product_list.html:119
+msgid "Ongoing Products"
+msgstr "Produits"
+
+#: .\website\templates\Product\update_product.html:5
+#: .\website\templates\Product\update_product.html:72
+msgid "Update Product"
+msgstr "Produits"
+
+#: .\website\templates\Product\update_product.html:60
+msgid "Completed"
+msgstr "Complété :"
+
+#: .\website\templates\Product\update_product.html:67
+msgid "Current Image"
+msgstr "Produits"
 
 #: .\website\templates\Stock\add_stock.html:6
 #: .\website\templates\Stock\add_stock.html:29
@@ -189,13 +296,6 @@ msgstr "Date de sortie"
 msgid "Quantity"
 msgstr "Quantité"
 
-#: .\website\templates\Stock\add_stock.html:30
-#: .\website\templates\Stock\update_stock.html:63
-#: .\website\templates\Supplier\add_supplier.html:104
-#: .\website\templates\Supplier\update_supplier.html:104
-msgid "Cancel"
-msgstr "Annuler"
-
 #: .\website\templates\Stock\stock_detail.html:16
 #: .\website\templates\Stock\stock_list.html:13
 #: .\website\templates\Stock\update_stock.html:39
@@ -211,21 +311,6 @@ msgstr "Pas de sortie"
 msgid "Stock List"
 msgstr "Liste des stocks"
 
-#: .\website\templates\Stock\stock_list.html:15
-#: .\website\templates\Supplier\supplier_list.html:53
-msgid "Actions"
-msgstr "Actions"
-
-#: .\website\templates\Stock\stock_list.html:33
-#: .\website\templates\Supplier\supplier_list.html:62
-msgid "View"
-msgstr "Voir"
-
-#: .\website\templates\Stock\stock_list.html:41
-#: .\website\templates\Supplier\supplier_list.html:67
-msgid "Delete"
-msgstr "Supprimer"
-
 #: .\website\templates\Stock\update_stock.html:6
 #: .\website\templates\Stock\update_stock.html:62
 msgid "Update Stock"
@@ -233,21 +318,16 @@ msgstr "Ajouter un stock"
 
 #: .\website\templates\Stock\update_stock.html:39
 msgid "Optional"
-msgstr ""
+msgstr "En option"
 
 #: .\website\templates\Supplier\add_supplier.html:7
 msgid "Add New Supplier"
 msgstr "Ajouter un fournisseur"
 
-#: .\website\templates\Supplier\add_supplier.html:14
-#: .\website\templates\Supplier\supplier_list.html:51
-#: .\website\templates\Supplier\update_supplier.html:14
-msgid "Name"
-msgstr "Nom"
-
 #: .\website\templates\Supplier\add_supplier.html:25
 #: .\website\templates\Supplier\supplier_list.html:52
 #: .\website\templates\Supplier\update_supplier.html:25
+#: .\website\templates\home.html:20
 msgid "City"
 msgstr "Ville"
 
@@ -258,6 +338,7 @@ msgstr "District"
 
 #: .\website\templates\Supplier\add_supplier.html:47
 #: .\website\templates\Supplier\update_supplier.html:47
+#: .\website\templates\home.html:19
 msgid "Address"
 msgstr "Adresse"
 
@@ -290,6 +371,7 @@ msgid "Supplier Details"
 msgstr "Fournisseurs"
 
 #: .\website\templates\Supplier\supplier_detail.html:9
+#: .\website\templates\record.html:31
 msgid "City:"
 msgstr "Ville"
 
@@ -298,6 +380,7 @@ msgid "District:"
 msgstr "District"
 
 #: .\website\templates\Supplier\supplier_detail.html:11
+#: .\website\templates\record.html:27
 msgid "Address:"
 msgstr "Adresse"
 
@@ -341,6 +424,43 @@ msgstr "Ajouter un fournisseur"
 msgid "Update"
 msgstr "Mise à jour"
 
+#: .\website\templates\home.html:15
+msgid "ID"
+msgstr "ID"
+
+#: .\website\templates\home.html:17
+msgid "Email"
+msgstr "Email"
+
+#: .\website\templates\home.html:18
+msgid "Phone"
+msgstr "Téléphone"
+
+#: .\website\templates\home.html:21
+msgid "State"
+msgstr "État"
+
+#: .\website\templates\home.html:22
+msgid "Zipcode"
+msgstr "Code postal"
+
+#: .\website\templates\home.html:23
+msgid "Created At"
+msgstr "Créé à"
+
+#: .\website\templates\home.html:46 .\website\templates\home.html:58
+#: .\website\templates\navbar.html:41
+msgid "Login"
+msgstr "Connexion"
+
+#: .\website\templates\home.html:51 .\website\templates\home.html:52
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: .\website\templates\home.html:55 .\website\templates\home.html:56
+msgid "Password"
+msgstr "Mot de passe"
+
 #: .\website\templates\navbar.html:5
 msgid "Kygsz CRM"
 msgstr ""
@@ -357,10 +477,6 @@ msgstr "Ajouter une fiche"
 msgid "Supplier List"
 msgstr "Fournisseurs"
 
-#: .\website\templates\navbar.html:23
-msgid "Products"
-msgstr "Produits"
-
 #: .\website\templates\navbar.html:27
 msgid "Stock"
 msgstr "Stock"
@@ -373,9 +489,43 @@ msgstr "Déconnexion"
 msgid "Register"
 msgstr "Registre"
 
-#: .\website\templates\navbar.html:41
-msgid "Login"
-msgstr "Connexion"
+#: .\website\templates\record.html:19
+#| msgid "Address:"
+msgid "Email Address:"
+msgstr "Adresse"
+
+#: .\website\templates\record.html:23
+#| msgid "Mobile Number:"
+msgid "Phone Number:"
+msgstr "Numéro de mobile"
+
+#: .\website\templates\record.html:35
+msgid "Neighborhood:"
+msgstr "Voisinage"
+
+#: .\website\templates\record.html:39
+msgid "Postal Code:"
+msgstr "Code postal :"
+
+#: .\website\templates\record.html:43
+#| msgid "Completion Date"
+msgid "Creation Date:"
+msgstr "Complété :"
+
+#: .\website\templates\record.html:47
+#, fuzzy
+#| msgid "ID"
+msgid "ID:"
+msgstr "ID"
+
+#: .\website\templates\record.html:54
+msgid "Back"
+msgstr "Retour"
+
+#: .\website\templates\record.html:58
+#| msgid "Add Record"
+msgid "Update Record"
+msgstr "Ajouter une fiche"
 
 #: .\website\views.py:168
 msgid "hello"

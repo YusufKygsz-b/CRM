@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 
 <style>
@@ -14,40 +15,45 @@
   </div>
   <div class="card-body">
 
+    <p class="card-text">
+      <strong>{% trans "Email Address:" %} </strong>{{ customer_record.email }}
+    </p>
 
-<p class="card-text">
-<strong>Email Adresi: </strong>{{ customer_record.email }}</p>
+    <p class="card-text">
+      <strong>{% trans "Phone Number:" %} </strong>{{ customer_record.phone }}
+    </p>
 
-<p class="card-text">
-<strong>Telefon No: </strong>{{ customer_record.phone }}
-</p>
+    <p class="card-text">
+      <strong>{% trans "Address:" %} </strong>{{ customer_record.address }}
+    </p>
 
-<p class="card-text">
-<strong>Adres: </strong>{{ customer_record.address }}</p>
+    <p class="card-text">
+      <strong>{% trans "City:" %} </strong>{{ customer_record.city }}
+    </p>
 
-<p class="card-text">
-<strong>Şehir: </strong>{{ customer_record.city }}</p>
+    <p class="card-text">
+      <strong>{% trans "Neighborhood:" %} </strong>{{ customer_record.state }}
+    </p>
 
-<p class="card-text">
-<strong>Mahalle: </strong>{{ customer_record.state }}</p>
+    <p class="card-text">
+      <strong>{% trans "Postal Code:" %} </strong>{{ customer_record.zipcode }}
+    </p>
 
-<p class="card-text">
-<strong>Posta Kodu: </strong>{{ customer_record.zipcode }}</p>
+    <p class="card-text">
+      <strong>{% trans "Creation Date:" %} </strong>{{ customer_record.created_at }}
+    </p>
 
-<p class="card-text">
-<strong>Oluşturulma Tarihi: </strong>{{ customer_record.created_at }}</p>
-
-<p class="card-text">
-<strong>ID: </strong>{{ customer_record.id }}</p>
-    
+    <p class="card-text">
+      <strong>{% trans "ID:" %} </strong>{{ customer_record.id }}
+    </p>
     
   </div>
 </div>
 
 <br/><br/>
-<a href="{% url 'home' %}" class="btn btn-dark">Geri</a>
+<a href="{% url 'home' %}" class="btn btn-dark">{% trans "Back" %}</a>
 
-<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">Sil</a>
+<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">{% trans "Delete" %}</a>
 
-<a href="{% url 'update_record' customer_record.id %}" class="btn btn-primary">Kaydı Güncelle</a>
+<a href="{% url 'update_record' customer_record.id %}" class="btn btn-primary">{% trans "Update Record" %}</a>
 {% endblock %}
